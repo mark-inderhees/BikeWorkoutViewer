@@ -11,4 +11,9 @@ if ((-not $env:JAVA_HOME) -or (-not (Test-Path $env:JAVA_HOME))) {
     }
 }
 
+if (-not (Test-Path '.\local.properties')) {
+    Write-Error 'Please create a local.properties file which sets sdk path like "sdk.dir=C\:\\Users\\marki\\AppData\\Local\\Android\\Sdk"'
+    exit -1
+}
+
 Start-Process -FilePath 'cmd.exe' -ArgumentList @('/c gradlew.bat') -PassThru -NoNewWindow -Wait | Out-Null
